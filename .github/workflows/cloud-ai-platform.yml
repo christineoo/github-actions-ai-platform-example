@@ -1,0 +1,31 @@
+name:  Trigger AI Platform Job
+
+on:
+  push:
+    branches:
+    - master
+
+env:
+  PROJECT_ID: ${{ secrets.RUN_PROJECT }}
+  SERVICE_NAME: christineoo-test-github-action
+
+jobs:
+  setup-build-deploy:
+    name: Testing
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup gcloud CLI
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '286.0.0'
+        service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY_JSON }}
+        project_id: ${{ secrets.PROJECT_ID }}
+
+    # list ai-platform jobs
+    - name: List jobs
+      run: |-
+        gcloud ai-platform jobs list
