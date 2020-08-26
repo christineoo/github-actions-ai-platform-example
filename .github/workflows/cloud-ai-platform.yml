@@ -41,14 +41,10 @@ jobs:
       run: |-
         make gcs_bucket_name=${{ secrets.GCS_BUCKET_NAME }} job_name=$JOB_NAME submit_job
         status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
-        make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
         while [ "$status" != "SUCCEEDED" ]
         do
-          sleep 10
+          sleep 60
           status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
-          if ["$status" == "SUCCEEDED" ]; then
-            break
-          fi
         done
     #    timeout 6 sleep 5 || make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
 
