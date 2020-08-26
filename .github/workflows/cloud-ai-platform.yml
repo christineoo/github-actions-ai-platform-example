@@ -40,17 +40,10 @@ jobs:
         JOB_NAME: christineoo_test_${{ steps.date.outputs.date }}
       run: |-
         make gcs_bucket_name=${{ secrets.GCS_BUCKET_NAME }} job_name=$JOB_NAME submit_job
-        status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
-        while [ "$status" != "SUCCEEDED" ]
+        while [ make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status != "SUCCEEDED" ]
         do
-          echo "before status:"
-          echo $status
           sleep 60
-          status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
-          echo "current status:"
-          echo $status
         done
-      shell: bash
     #    timeout 6 sleep 5 || make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
 
     # check ai-platform job status
