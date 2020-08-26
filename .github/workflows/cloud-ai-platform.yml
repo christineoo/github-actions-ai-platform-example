@@ -38,4 +38,4 @@ jobs:
     # check ai-platform job status
     - name: check job status
       run: |-
-        timeout 6 sleep 5 || make curl_status
+        make curl_status
