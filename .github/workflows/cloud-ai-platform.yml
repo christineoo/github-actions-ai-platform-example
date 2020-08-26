@@ -43,11 +43,14 @@ jobs:
         status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
         while [ "$status" != "SUCCEEDED" ]
         do
-          echo "before status:" $status
+          echo "before status:"
+          echo $status
           sleep 60
           status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
-          echo "current status:" $status
+          echo "current status:"
+          echo $status
         done
+      shell: bash
     #    timeout 6 sleep 5 || make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
 
     # check ai-platform job status
