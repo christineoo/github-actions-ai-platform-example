@@ -40,12 +40,12 @@ jobs:
         JOB_NAME: christineoo_test_${{ steps.date.outputs.date }}
       run: |-
         make gcs_bucket_name=${{ secrets.GCS_BUCKET_NAME }} job_name=$JOB_NAME submit_job
-        status= make curl_status
+        status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
         make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
         while [ "$status" != "SUCCEEDED" ]
         do
           sleep 10
-          status= make curl_status
+          status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
           if ["$status" == "SUCCEEDED" ]; then
             break
           fi
