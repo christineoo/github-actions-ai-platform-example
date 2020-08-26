@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
+
     - name: Checkout
       uses: actions/checkout@v2
 
@@ -31,11 +35,14 @@ jobs:
         gcloud ai-platform jobs list
 
     # submit ai-platform jobs
-    - name: submit jobs
+    - name: submit jobs and check status
+      env:
+        JOB_NAME: christineoo_test_${{ steps.date.outputs.date }}
       run: |-
-        make gcs_bucket_name=${{ secrets.GCS_BUCKET_NAME }} submit_job
+        make gcs_bucket_name=${{ secrets.GCS_BUCKET_NAME }} job_name=$JOB_NAME submit_job
+        make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
 
     # check ai-platform job status
     - name: check job status
       run: |-
-        make curl_status
+        timeout 6 sleep 5 || make curl_status
