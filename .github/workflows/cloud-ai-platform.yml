@@ -40,9 +40,9 @@ jobs:
         JOB_NAME: christineoo_test_${{ steps.date.outputs.date }}
       run: |-
         make gcs_bucket_name=${{ secrets.GCS_BUCKET_NAME }} job_name=$JOB_NAME submit_job
-        make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
+        timeout 6 sleep 5 || make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
 
     # check ai-platform job status
-    - name: check job status
-      run: |-
-        timeout 6 sleep 5 || make curl_status
+    # - name: check job status
+    #   run: |-
+    #     timeout 6 sleep 5 || make curl_status
