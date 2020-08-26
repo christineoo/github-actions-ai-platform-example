@@ -29,3 +29,8 @@ jobs:
     - name: List jobs
       run: |-
         gcloud ai-platform jobs list
+
+    # submit ai-platform jobs
+    - name: sumbit jobs
+      run: |-
+        make gcs_bucket_name=${{ secrets.GCS_BUCKET_NAME }} submit_job
