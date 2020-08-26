@@ -31,6 +31,11 @@ jobs:
         gcloud ai-platform jobs list
 
     # submit ai-platform jobs
-    - name: sumbit jobs
+    - name: submit jobs
       run: |-
         make gcs_bucket_name=${{ secrets.GCS_BUCKET_NAME }} submit_job
+
+    # check ai-platform job status
+    - name: check job status
+      run: |-
+        timeout 6 sleep 5 || make curl_status
