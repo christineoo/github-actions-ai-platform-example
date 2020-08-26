@@ -43,8 +43,10 @@ jobs:
         status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
         while [ "$status" != "SUCCEEDED" ]
         do
+          echo "before status:" $status
           sleep 60
           status= make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
+          echo "current status:" $status
         done
     #    timeout 6 sleep 5 || make job_name=$JOB_NAME project_id=${{ secrets.PROJECT_ID }} curl_status
 
