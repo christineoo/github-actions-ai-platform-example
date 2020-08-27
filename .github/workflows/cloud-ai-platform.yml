@@ -1,9 +1,9 @@
 name:  Trigger AI Platform Job
 
 on:
-  push:
-    branches:
-    - master
+  pull_request:
+    paths:
+    - trainer
 
 env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
