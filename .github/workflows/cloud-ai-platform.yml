@@ -3,8 +3,6 @@ name:  Trigger AI Platform Job
 on:
   pull_request:
     types: [opened, edited]
-    paths:
-    - 'trainer/**'
 
 env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
