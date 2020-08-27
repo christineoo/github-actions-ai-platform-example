@@ -1,5 +1,5 @@
 SECONDS=0
-TIMEOUT=360
+TIMEOUT=3600
 expected_state='"SUCCEEDED"'
 auth_token="$(gcloud auth print-access-token)"
 state=$(curl -X GET \
