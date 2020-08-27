@@ -2,9 +2,9 @@ name:  Trigger AI Platform Job
 
 on:
   pull_request:
-    types: [opened, edited]
     paths:
-    - 'trainer/**.py'
+      - .github/workflows/cloud-ai-platform.yaml
+      - trainer/**.py
 
 env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
