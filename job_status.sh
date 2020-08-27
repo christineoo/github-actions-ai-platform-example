@@ -18,6 +18,10 @@ do
 
   ((SECONDS++))
   sleep 120
+  state=$(curl -X GET \
+	-H "Content-Type: application/json" \
+	-H "Authorization: Bearer $auth_token" \
+	"https://content-ml.googleapis.com/v1/projects/$1/jobs/$2" | jq .state)
 done
 
 if [ $SECONDS -gt $TIMEOUT ]; then
