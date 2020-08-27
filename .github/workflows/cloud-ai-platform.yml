@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, edited]
     paths:
-    - 'trainer/**'
+    - 'trainer/**.py'
 
 env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
