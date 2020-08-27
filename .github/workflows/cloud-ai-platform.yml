@@ -31,7 +31,7 @@ jobs:
         project_id: ${{ secrets.PROJECT_ID }}
 
     # submit ai-platform jobs and check the status of the submitted job
-    - name: submit jobs and check status
+    - name: Run submit job and check the status of the job
       env:
         JOB_NAME: christineoo_test_${{ steps.date.outputs.date }}
       run: |-
