@@ -1,9 +1,10 @@
-name:  Trigger AI Platform Job
+name:  Trigger Google Cloud Platform
 
 on:
   pull_request:
     paths:
-    - trainer
+      - .github/workflows/cloud-ai-platform.yaml
+      - trainer/**.py
 
 env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
@@ -11,7 +12,7 @@ env:
 
 jobs:
   setup-build-deploy:
-    name: Testing
+    name: Submit AI Platform Job
     runs-on: ubuntu-latest
 
     steps:
@@ -29,13 +30,8 @@ jobs:
         service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY_JSON }}
         project_id: ${{ secrets.PROJECT_ID }}
 
-    # list ai-platform jobs
-    - name: List jobs
-      run: |-
-        gcloud ai-platform jobs list
-
-    # submit ai-platform jobs
-    - name: submit jobs and check status
+    # submit ai-platform jobs and check the status of the submitted job
+    - name: Run submit job and check the status of the job
       env:
         JOB_NAME: christineoo_test_${{ steps.date.outputs.date }}
       run: |-
